@@ -11,11 +11,8 @@ SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def readschedule():
     f = open('schedule.txt')
-    data1 = f.read()  # ファイル終端まで全て読んだデータを返す
-    # print(type(data1)) # 文字列データ
-    lines1 = data1.split('\n') # 改行で区切る(改行文字そのものは戻り値のデータには含まれない)
-    # print(lines1)
-    # print(lines1[1])
+    data1 = f.read()  
+    lines1 = data1.split('\n') 
     f.close()
     return lines1
 
@@ -67,17 +64,16 @@ def main():
         y_s = year
         y_e = year
 
-        #年を繰り上げるやつを書く
         if(mon == 12 and d_e == 31): 
             y_e = year + 1
-        
+
         if(num_days == d_e):
             d_e = 1
             if mon == 12: m_e = 1
             else: m_e = m_e + 1 
 
-        
-            
+
+
         event = {
         'summary': '{}'.format(s[1]),
         'location': 'unchi',
@@ -91,7 +87,7 @@ def main():
             'timeZone': 'Japan',
         },
         }
-        event = service.events().insert(calendarId='migisoh227@gmail.com',body=event).execute()
+        event = service.events().insert(calendarId='自分のカレンダーIDを入力',body=event).execute()
         print (event['id'])
 
 if __name__ == '__main__':
